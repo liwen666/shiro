@@ -19,7 +19,7 @@ public class SysUserServiceTest extends BaseTest {
     public void add() {
         SysUser sysUser = new SysUser();
         sysUser.setPassword("123456");
-        sysUser.setUsername("admin");
+        sysUser.setUsername("admin1");
         SysUser sysUserR = sysUserService.add(sysUser);
         logger.info(JSON.toJSONString(sysUserR));
     }
