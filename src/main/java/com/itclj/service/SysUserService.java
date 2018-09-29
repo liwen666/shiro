@@ -40,4 +40,13 @@ public interface SysUserService {
      * @return 用户列表
      */
     List<SysUser> query(SysUser sysUser);
+
+    /**
+     * 通过用户名密码获取用户信息
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
+    SysUser queryByUsernameAndPassword(String username, String password);
 }

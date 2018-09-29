@@ -4,6 +4,7 @@ import com.itclj.mapper.SysUserMapper;
 import com.itclj.model.SysUser;
 import com.itclj.model.SysUserExample;
 import com.itclj.service.SysUserService;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,5 +43,17 @@ public class SysUserServiceImpl implements SysUserService {
     public List<SysUser> query(SysUser sysUser) {
         SysUserExample example = new SysUserExample();
         return sysUserMapper.selectByExample(example);
+    }
+
+    public SysUser queryByUsernameAndPassword(String username, String password) {
+        SysUserExample example = new SysUserExample();
+        example.createCriteria().
+                andUsernameEqualTo(username).
+                andPasswordEqualTo(password);
+        List<SysUser> sysUsers = sysUserMapper.selectByExample(example);
+        if (CollectionUtils.isNotEmpty(sysUsers)) {
+            return sysUsers.get(0);
+        }
+        return null;
     }
 }
