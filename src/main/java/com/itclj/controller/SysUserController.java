@@ -1,11 +1,11 @@
 package com.itclj.controller;
 
+import com.itclj.common.entity.ResponseData;
 import com.itclj.model.SysUser;
 import com.itclj.service.SysUserService;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 用户管理
@@ -25,7 +25,20 @@ public class SysUserController {
      * @return 用户信息
      */
     @PostMapping("/add")
-    public SysUser add(SysUser sysUser) {
-        return sysUserService.add(sysUser);
+    @RequiresPermissions("user:add")
+    public ResponseData add(@RequestBody SysUser sysUser) {
+        return new ResponseData(sysUserService.add(sysUser));
+    }
+
+    /**
+     * 获取用户详细
+     *
+     * @param userid 用户ID
+     * @return
+     */
+    @GetMapping("/{userid}")
+    @RequiresPermissions("user:detail")
+    public ResponseData detail(@PathVariable("userid") Integer userid) {
+        return new ResponseData(sysUserService.detail(userid));
     }
 }

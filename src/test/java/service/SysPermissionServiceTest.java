@@ -18,8 +18,8 @@ public class SysPermissionServiceTest extends BaseTest {
     @Test
     public void add() {
         SysPermission sysPermission = new SysPermission();
-        sysPermission.setCode("user:add");
-        sysPermission.setName("添加用户");
+        sysPermission.setCode("user:detail");
+        sysPermission.setName("获取用户详细");
         SysPermission sysPermissionR = sysPermissionService.add(sysPermission);
         logger.info(JSON.toJSONString(sysPermissionR));
     }

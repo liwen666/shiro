@@ -18,7 +18,7 @@ public class SysRolePermissionServiceTest extends BaseTest {
     @Test
     public void add() {
         SysRolePermission sysRolePermission = new SysRolePermission();
-        sysRolePermission.setPermissionId(1);
+        sysRolePermission.setPermissionId(2);
         sysRolePermission.setRoleId(1);
         SysRolePermission sysRolePermissionR = sysRolePermissionService.add(sysRolePermission);
         logger.info(JSON.toJSONString(sysRolePermissionR));
