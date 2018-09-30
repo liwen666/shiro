@@ -1,5 +1,6 @@
 package com.itclj.common.shiro;
 
+import com.alibaba.fastjson.JSON;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
@@ -65,7 +66,10 @@ public class ShiroConfiguration {
      */
     @Bean
     public SecurityManager securityManager() {
+        logger.info("=======================shirio=======================");
+        logger.info("jedisCluster:{}", JSON.toJSONString(jedisCluster));
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+        securityManager.setSessionManager(sessionManager());
         securityManager.setRealm(userRealm());
         return securityManager;
     }

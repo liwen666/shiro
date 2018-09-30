@@ -1,8 +1,12 @@
 package com.itclj.common.redis;
 
+import com.alibaba.fastjson.JSON;
 import com.itclj.common.enums.CodeEnum;
 import com.itclj.common.exception.ItcljException;
+import javax.annotation.Resource;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +16,6 @@ import org.springframework.util.StringUtils;
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.JedisCluster;
 
-import javax.annotation.Resource;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -24,6 +27,8 @@ import java.util.Set;
 @ConditionalOnClass({JedisCluster.class})
 @EnableConfigurationProperties(RedisProperties.class)
 public class RedisConfiguration {
+
+    private Logger logger= LoggerFactory.getLogger(RedisConfiguration.class);
 
     @Resource
     private RedisProperties redisProperties;
@@ -49,6 +54,10 @@ public class RedisConfiguration {
         config.setMaxTotal(redisProperties.getMaxTotal());
         config.setMaxIdle(redisProperties.getMaxIdle());
         config.setMinIdle(redisProperties.getMinIdle());
+
+        logger.info("========================redis========================");
+        logger.info("redisProperties:{}", JSON.toJSONString(redisProperties));
+
         return new JedisCluster(nodes, redisProperties.getConnectionTimeout(),
                 redisProperties.getSoTimeout(), redisProperties.getMaxRedirections(), config);
     }
