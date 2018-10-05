@@ -37,7 +37,7 @@ public class SysUserController {
      * @return
      */
     @GetMapping("/{userid}")
-    @RequiresPermissions("user:detail")
+    @RequiresPermissions("user:detail")//具有 user:detail 权限的用户才能访问此方法
     public ResponseData detail(@PathVariable("userid") Integer userid) {
         return new ResponseData(sysUserService.detail(userid));
     }

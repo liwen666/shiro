@@ -22,12 +22,22 @@ public class MainController {
     @Autowired
     private JedisCluster jedisCluster;
 
+    /**
+     * 登录
+     *
+     * shiro登录，shiro采用Facade模式（门面模式），所有与shiro的交互都通过Subject对象API。
+     * 调用Subject.login后会触发UserRealm的doGetAuthenticationInfo方法，进行具体的登录验证处理。
+     *
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
     @RequestMapping("/login")
     public ResponseData login(String username, String password) {
         Subject currentUser = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
-            currentUser.login(token);
+            currentUser.login(token);//会触发com.itclj.common.shiro.UserRealm的doGetAuthenticationInfo方法
             Session session = SecurityUtils.getSubject().getSession();
             UserVO userVO = (UserVO) session.getAttribute(Constants.SESSION_USER_INFO);
             jedisCluster.setex(Constants.REDIS_KEY_PREFIX_SHIRO_TOKEN + userVO.getToken(),
