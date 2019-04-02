@@ -18,6 +18,7 @@ public class RedisTest extends BaseTest {
   public void set() {
     String res = jedisCluster.setex("itclj:test:20180930001", 30, "aaaaa");
     logger.info(JSON.toJSONString(res));
+    logger.debug(JSON.toJSONString(res));
   }
 
 }

@@ -35,7 +35,7 @@ public class RedisConfiguration {
 
     @Bean
     public JedisCluster jedisCluster() {
-        Set<HostAndPort> nodes = new HashSet<>();
+        Set<HostAndPort> nodes = new HashSet<HostAndPort>();
         for (String node : redisProperties.getNodes()) {
             try {
                 String[] parts = StringUtils.split(node, ":");

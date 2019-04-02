@@ -38,6 +38,7 @@ public class BeanUtil extends BeanUtils {
      */
     public static <T> T copyProperties(Object sourceObj, Class<T> targetClazz) {
         return BeanUtil.copyProperties(sourceObj, targetClazz, new String[]{});
+//        return BeanUtil.copyProperties(sourceObj, targetClazz, new String[]{"password"});
     }
 
     private static <T> T copyProperties(Object sourceObj, Class<T> targetClazz,

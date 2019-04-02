@@ -1,6 +1,7 @@
 package common;
 
 import com.itclj.ItcljApplication;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,4 +15,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(classes = ItcljApplication.class)
 public class BaseTest {
     public Logger logger = LoggerFactory.getLogger(getClass());
+    @Test
+    public void test(){
+        logger.info("{}","log");
+    }
 }
